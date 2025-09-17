@@ -1,0 +1,32 @@
+import zipfile
+
+# Paths
+zip_path = '/mnt/data/israatravel_website_full.zip'
+html_path = '/mnt/data/israa_travel_site_full.html'
+sitemap_path = '/mnt/data/sitemap.xml'
+robots_path = '/mnt/data/robots.txt'
+
+# إعادة إنشاء sitemap.xml و robots.txt
+with open(sitemap_path, 'w', encoding='utf-8') as f:
+    f.write("""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://vb110ddk110-cpu.github.io/israatravel/</loc>
+    <lastmod>2025-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>""")
+
+with open(robots_path, 'w', encoding='utf-8') as f:
+    f.write("""User-agent: *
+Allow: /
+Sitemap: https://vb110ddk110-cpu.github.io/israatravel/sitemap.xml""")
+
+# إنشاء ملف ZIP يحتوي على الثلاثة ملفات
+with zipfile.ZipFile(zip_path, 'w') as zipf:
+    zipf.write(html_path, arcname='index.html')
+    zipf.write(sitemap_path, arcname='sitemap.xml')
+    zipf.write(robots_path, arcname='robots.txt')
+
+zip_path
